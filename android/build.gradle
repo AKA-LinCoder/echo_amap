@@ -1,0 +1,64 @@
+group 'com.lsaac.echo_amap'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+
+dependencies {
+
+    //3D地图so及jar
+//    api 'com.amap.api:3dmap:latest.integration'{
+//        exclude group: 'com.amap.api.fence', module: 'DistrictItem'
+//    }
+    //定位功能
+//    api 'com.amap.api:location:latest.integration'
+    //搜索功能
+    api 'com.amap.api:search:latest.integration'
+    //导航
+//    api 'com.amap.api:navi-3dmap:latest.integration'
+    api ('com.amap.api:navi-3dmap:latest.integration')
+//    api 'com.amap.api:navi-3dmap:latest.integration'{
+//        exclude group(com.amap.api.fence),module(DistrictItem)
+//    }
+}
