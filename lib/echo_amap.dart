@@ -1,5 +1,5 @@
 
-import 'package:echo_amap/utils/echo_amap_util_platform_interface.dart';
+
 
 import 'echo_amap_platform_interface.dart';
 import 'model/echo_lng_lat.dart';

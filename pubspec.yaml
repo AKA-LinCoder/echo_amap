@@ -1,7 +1,7 @@
 name: echo_amap
-description: 高德地图相关
+description: 高德地图相关小工具
 version: 0.0.1
-homepage:
+homepage: https://github.com/AKA-LinCoder/echo_amap
 
 environment:
   sdk: '>=2.19.5 <3.0.0'

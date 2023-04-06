@@ -9,9 +9,9 @@ import androidx.annotation.NonNull
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
 import com.lsaac.echo_amap.EchoAmapPlugin
-import com.lsaac.echo_amap.extension.toUtilPluginMethod
+import com.lsaac.echo_amap.extension.toPluginMethod
 import com.lsaac.echo_amap.model.LngAndLat
-import com.lsaac.echo_amap.model.UtilPluginMethod
+import com.lsaac.echo_amap.model.PluginMethod
 import io.flutter.Log
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -77,21 +77,21 @@ class UtilPlugin:FlutterPlugin,MethodCallHandler,ActivityAware {
             locationManager = mContext?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
         }
 
-        when (call.method.toUtilPluginMethod()){
-            is UtilPluginMethod.calculateLineDistance ->{
+        when (call.method.toPluginMethod()){
+            is PluginMethod.calculateLineDistance ->{
                 val  arguments = call.arguments as List<Double>
                 val lngAndLat1 = LngAndLat(latitude = arguments[1], longitude = arguments[0])
                 val lngAndLat2 = LngAndLat(latitude = arguments[3], longitude = arguments[2])
                 calculateLineDistance( lngAndLat1 = lngAndLat1, lngAndLat2 = lngAndLat2, result = result)
             }
-            is UtilPluginMethod.calculateLineDistanceByAmap ->{
+            is PluginMethod.calculateLineDistanceByAmap ->{
                 val  arguments = call.arguments as List<Double>
                 val lngAndLat1 = LngAndLat(latitude = arguments[1], longitude = arguments[0])
                 val lngAndLat2 = LngAndLat(latitude = arguments[3], longitude = arguments[2])
                 calculateLineDistanceByAmap( lngAndLat1 = lngAndLat1, lngAndLat2 = lngAndLat2, result = result)
             }
 
-            is UtilPluginMethod.getCurrentLocation ->{
+            is PluginMethod.getCurrentLocation ->{
 
                 // 通过GPS定位
                 val location = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
@@ -99,7 +99,7 @@ class UtilPlugin:FlutterPlugin,MethodCallHandler,ActivityAware {
                 val longitude = location?.longitude ?: 0.0
                 result.success(mapOf<String,Double>("latitude" to latitude, "longitude" to longitude))
             }
-            is UtilPluginMethod.getCurrentLocationByAmap ->{
+            is PluginMethod.getCurrentLocationByAmap ->{
 
             }
             else -> {

@@ -11,9 +11,9 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
-import com.lsaac.echo_amap.extension.toUtilPluginMethod
+import com.lsaac.echo_amap.extension.toPluginMethod
 import com.lsaac.echo_amap.model.LngAndLat
-import com.lsaac.echo_amap.model.UtilPluginMethod
+import com.lsaac.echo_amap.model.PluginMethod
 import com.lsaac.echo_amap.utils.UtilPlugin
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -63,7 +63,6 @@ class EchoAmapPlugin: FlutterPlugin, MethodCallHandler {
         val longitude = location.longitude
 
         val result = mapOf("latitude" to latitude, "longitude" to longitude)
-        Log.i("dasd", "监听结果${location}")
         channel.invokeMethod("onLocationChanged", result)
       }
       override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -92,31 +91,29 @@ class EchoAmapPlugin: FlutterPlugin, MethodCallHandler {
       locationManager = mContext?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
     }
 
-    when (call.method.toUtilPluginMethod()){
-      is UtilPluginMethod.calculateLineDistance ->{
+    when (call.method.toPluginMethod()){
+      is PluginMethod.calculateLineDistance ->{
         val  arguments = call.arguments as List<Double>
         val lngAndLat1 = LngAndLat(latitude = arguments[1], longitude = arguments[0])
         val lngAndLat2 = LngAndLat(latitude = arguments[3], longitude = arguments[2])
         calculateLineDistance( lngAndLat1 = lngAndLat1, lngAndLat2 = lngAndLat2, result = result)
       }
-      is UtilPluginMethod.calculateLineDistanceByAmap ->{
+      is PluginMethod.calculateLineDistanceByAmap ->{
         val  arguments = call.arguments as List<Double>
         val lngAndLat1 = LngAndLat(latitude = arguments[1], longitude = arguments[0])
         val lngAndLat2 = LngAndLat(latitude = arguments[3], longitude = arguments[2])
         calculateLineDistanceByAmap( lngAndLat1 = lngAndLat1, lngAndLat2 = lngAndLat2, result = result)
       }
 
-      is UtilPluginMethod.getCurrentLocation ->{
+      is PluginMethod.getCurrentLocation ->{
         locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER,0, 0f, locationListener)
         // 通过GPS定位
         val location = locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        Log.i("dasd",locationManager.toString())
-        Log.i("dasd",location.toString())
         val latitude = location?.latitude ?: 0.0
         val longitude = location?.longitude ?: 0.0
         result.success(mapOf<String,Double>("latitude" to latitude, "longitude" to longitude))
       }
-      is UtilPluginMethod.getCurrentLocationByAmap ->{
+      is PluginMethod.getCurrentLocationByAmap ->{
         val locationClient = AMapLocationClient(mContext)
         val locationOption = AMapLocationClientOption()
         locationOption.isOnceLocation = true
@@ -128,16 +125,18 @@ class EchoAmapPlugin: FlutterPlugin, MethodCallHandler {
           override fun onLocationChanged(location: AMapLocation?) {
             locationClient.stopLocation()
             if (location == null || location.errorCode != 0) {
-              Log.i("dasd","some thing wrong")
+
             } else {
-              Log.i("dasd",location.toString())
+
 //              callback(Location(location.latitude, location.longitude))
             }
           }
         })
         locationClient.startLocation()
       }
-
+      is PluginMethod.getPlatformVersion ->{
+        result.success("Android ${android.os.Build.VERSION.RELEASE}")
+      }
       else -> {
         result.success("unknown function")
       }

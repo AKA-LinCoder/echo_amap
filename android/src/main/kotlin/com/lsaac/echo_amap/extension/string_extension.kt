@@ -1,14 +1,16 @@
 package com.lsaac.echo_amap.extension
 
-import com.lsaac.echo_amap.model.UtilPluginMethod
+import com.lsaac.echo_amap.model.PluginMethod
 
-fun String.toUtilPluginMethod(): UtilPluginMethod {
+
+fun String.toPluginMethod(): PluginMethod {
     return  when(this){
-        "calculateLineDistance" ->UtilPluginMethod.calculateLineDistance
-        "fuckYou" -> UtilPluginMethod.fuckYou
-        "calculateLineDistanceByAmap" -> UtilPluginMethod.calculateLineDistanceByAmap
-        "getCurrentLocation" -> UtilPluginMethod.getCurrentLocation
-        "getCurrentLocationByAmap" -> UtilPluginMethod.getCurrentLocationByAmap
-        else -> UtilPluginMethod.unKown
+        "calculateLineDistance" ->PluginMethod.calculateLineDistance
+        "fuckYou" -> PluginMethod.fuckYou
+        "calculateLineDistanceByAmap" -> PluginMethod.calculateLineDistanceByAmap
+        "getCurrentLocation" -> PluginMethod.getCurrentLocation
+        "getCurrentLocationByAmap" -> PluginMethod.getCurrentLocationByAmap
+        "getPlatformVersion" -> PluginMethod.getPlatformVersion
+        else -> PluginMethod.unKown
     }
 }

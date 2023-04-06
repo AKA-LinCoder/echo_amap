@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       var endPoint =  EchoLngAndLat(longitude: 104.190556, latitude: 30.812500);
       distance1 = await _echoAmapPlugin.calculateLineDistance(startPoint, endPoint)??'';
       distance2 = await _echoAmapPlugin.calculateLineDistanceByAmap(startPoint, endPoint)??'';
-      location1 = await _echoAmapPlugin.getCurrentLocation();
+      // location1 = await _echoAmapPlugin.getCurrentLocation();
       // location2 = await _echoAmapPlugin.getCurrentLocationByAmap();
 
     } on PlatformException {
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Echo amap'),
         ),
         body: Center(
           child: Column(
@@ -73,8 +73,8 @@ class _MyAppState extends State<MyApp> {
               Text('Running on: $_platformVersion\n'),
               Text('原生距离: $distance1\n'),
               Text('高德距离: $distance2\n'),
-              Text("当前距离:$location1"),
-              Text("当前距离:$location2"),
+              // Text("当前距离:$location1"),
+              // Text("当前距离:$location2"),
             ],
           ),
         ),

@@ -1,11 +1,13 @@
 package com.lsaac.echo_amap.model
 
-sealed class UtilPluginMethod {
-    object calculateLineDistance:UtilPluginMethod()
-    object fuckYou:UtilPluginMethod()
+sealed class PluginMethod {
+    object calculateLineDistance:PluginMethod()
+    object fuckYou:PluginMethod()
 
-    object unKown:UtilPluginMethod()
-    object calculateLineDistanceByAmap:UtilPluginMethod()
-    object getCurrentLocation:UtilPluginMethod()
-    object getCurrentLocationByAmap:UtilPluginMethod()
+    object unKown:PluginMethod()
+    object calculateLineDistanceByAmap:PluginMethod()
+    object getCurrentLocation:PluginMethod()
+    object getCurrentLocationByAmap:PluginMethod()
+
+    object getPlatformVersion:PluginMethod()
 }

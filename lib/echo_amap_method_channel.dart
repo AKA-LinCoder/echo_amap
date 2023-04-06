@@ -39,20 +39,17 @@ class MethodChannelEchoAmap extends EchoAmapPlatform {
     return version;
   }
 
-  @override
-  Future<EchoLngAndLat?> getCurrentLocation() async{
-
-    Map? res = await methodChannel.invokeMapMethod("getCurrentLocation");
-    var temp = Map<String,double>.from(res??{});
-    print("获取到的数据$temp");
-    return EchoLngAndLat(longitude: temp["longitude"]??0, latitude:  temp["latitude"]??0);
-  }
-
-  @override
-  Future<EchoLngAndLat?> getCurrentLocationByAmap() async{
-    Map? res = await methodChannel.invokeMapMethod("getCurrentLocationByAmap");
-    var temp = Map<String,double>.from(res??{});
-    print("获取到的数据$temp");
-    return EchoLngAndLat(longitude: temp["longitude"]??0, latitude:  temp["latitude"]??0);
-  }
+  // @override
+  // Future<EchoLngAndLat?> getCurrentLocation() async{
+  //   Map? res = await methodChannel.invokeMapMethod("getCurrentLocation");
+  //   var temp = Map<String,double>.from(res??{});
+  //   return EchoLngAndLat(longitude: temp["longitude"]??0, latitude:  temp["latitude"]??0);
+  // }
+  //
+  // @override
+  // Future<EchoLngAndLat?> getCurrentLocationByAmap() async{
+  //   Map? res = await methodChannel.invokeMapMethod("getCurrentLocationByAmap");
+  //   var temp = Map<String,double>.from(res??{});
+  //   return EchoLngAndLat(longitude: temp["longitude"]??0, latitude:  temp["latitude"]??0);
+  // }
 }
