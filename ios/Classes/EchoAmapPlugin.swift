@@ -7,7 +7,7 @@ import MAMapKit
 
 public class EchoAmapPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "echo_amap", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "test", binaryMessenger: registrar.messenger())
     let instance = EchoAmapPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
@@ -36,7 +36,7 @@ public class EchoAmapPlugin: NSObject, FlutterPlugin {
     //MARK - 通过高德地图计算距离
     func calculateLineDistanceByAmap(lngAndLat1:lngAndLat,lngAndLat2:lngAndLat ,result: @escaping FlutterResult){
         let coordinate1 = CLLocationCoordinate2D(latitude: lngAndLat1.latitude, longitude: lngAndLat1.longitude)
-        let coordinate2 = CLLocationCoordinate2D(latitude: lngAndLat2.latitude, longitude: lngAndLat2.longitude)
+        l et coordinate2 = CLLocationCoordinate2D(latitude: lngAndLat2.latitude, longitude: lngAndLat2.longitude)
         let distance = MAMetersBetweenMapPoints(MAMapPointForCoordinate(coordinate1), MAMapPointForCoordinate(coordinate2))
         result("\(distance)") // 输出两个经纬度之间的距离，单位为米
         
